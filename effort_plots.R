@@ -58,7 +58,7 @@ effort_moment_fao_plot <- function(gear_type,
     mutate(fao_area_code = as.factor(fao_area_code),
            ord = get(ordinate))
   
-  model <- lm(ord ~ effort_moment, data=filt_data)
+  model <- lm(ord ~ effort_moment, data=filt_data, weights = n_vessel)
   
   fao_mplot <- filt_data %>% ggplot()+
     geom_smooth(method = "lm", se = TRUE, linetype = "dotted", # inherit.aes = FALSE,

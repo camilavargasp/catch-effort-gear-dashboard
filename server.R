@@ -41,26 +41,3 @@ function(input, output){
 }
 
 
-
-
-
-# fao_area_option <- switch(input$fao_areas,
-#                           "Area 18" = 18,
-#                           "Area 21" = 21,
-#                           "Area 27" = 27,
-#                           "Area 31" = 31,
-#                           "Area 34" = 34,
-#                           "Area 37" = 37,
-#                           "Area 41" = 41,
-#                           "Area 47" = 47,
-#                           "Area 48" = 48,
-#                           "Area 51" = 51,
-#                           "Area 57" = 57,
-#                           "Area 58" = 58,
-#                           "Area 61" = 61,
-#                           "Area 67" = 67,
-#                           "Area 71" = 71,
-#                           "Area 77" = 77,
-#                           "Area 81" = 81,
-#                           "Area 87" = 87,
-#                           "Area 88" = 88)
