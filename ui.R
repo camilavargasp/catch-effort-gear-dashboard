@@ -5,6 +5,8 @@ library(plotly)
 
 source("effort_plots.R")
 
+source("fisheries_species.R")
+
 
 # Setting up the dashboard page
 dashboardPage(
@@ -75,7 +77,27 @@ dashboardPage(
       
       ##Second tab content - Fisheries Info
       tabItem(tabName = "fisheries_info",
-              h2("Fisheries Information by Country")
+              h2("Fisheries Information by Country"),
+              h3("Learn about a fishery by selecting a country and a fishery within that territory"),
+            fluidRow(
+              box(
+                selectInput("country_fishery",
+                            label = "Select a Country",
+                            choices = unique(fisheries_info$country)),
+                selectInput("fishery_fishery",
+                            label = "Select a Fishery",
+                            choices = unique(fisheries_info$fishery_name)),
+                width = 4),
+              
+              #uiOutput("fishery_selection")
+              
+              box(
+                h3("Species Allocation for Selected Fishery"),
+                
+                tableOutput("species_table"),
+                width = 8)
+              
+            )
               )
     )
   )

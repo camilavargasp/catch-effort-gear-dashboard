@@ -1,7 +1,7 @@
 library(shiny)
 library(ggplot2) # load ggplot
 
-function(input, output){
+function(input, output, session){
   
 
   output$catch_effort_plot <- renderPlotly({
@@ -38,6 +38,20 @@ function(input, output){
                               input_data= catch_effort_data)
      }
   })
-}
+
+  observe({
+    updateSelectInput(session, 
+                      "fishery_fishery", 
+                      choices = fisheries_info[fisheries_info$country == input$country_fishery, "fishery_name"])
+  })
+       
+  output$species_table <- renderTable({
+    
+    species_by_fishery(country_name = country_fishery, 
+                       fishery = fishery_fishery)
+    
+  })
+     
+  }
 
 
