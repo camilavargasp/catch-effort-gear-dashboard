@@ -5,7 +5,7 @@ library(plotly)
 
 source("effort_plots.R")
 
-source("fisheries_species.R")
+fisheries_info <- read_csv("data/fao_fisheries_norm_bk.csv")
 
 
 # Setting up the dashboard page
@@ -70,7 +70,7 @@ dashboardPage(
                   
                   plotlyOutput("catch_effort_facet",
                                height = "800px"),
-                  width = 8),
+                  width = 8)
                  
              )
             ),
@@ -89,17 +89,19 @@ dashboardPage(
                             choices = unique(fisheries_info$fishery_name)),
                 width = 4),
               
-              #uiOutput("fishery_selection")
               
               box(
-                h3("Species Allocation for Selected Fishery"),
+                h3(
+                  textOutput("table_title")
+                ),
                 
                 tableOutput("species_table"),
                 width = 8)
-              
-            )
-              )
+           ),
+    
+        
+      )
     )
   )
-)  
+
 

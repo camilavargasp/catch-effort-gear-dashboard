@@ -45,13 +45,48 @@ function(input, output, session){
                       choices = fisheries_info[fisheries_info$country == input$country_fishery, "fishery_name"])
   })
        
+  output$table_title <- renderText({ 
+    
+    paste0("Species Allocation for ", input$fishery_fishery, " in " , input$country_fishery)
+  })
+  
   output$species_table <- renderTable({
     
-    species_by_fishery(country_name = country_fishery, 
-                       fishery = fishery_fishery)
+species_alocation <- fisheries_info %>% 
+      filter(country == input$country_fishery,
+             fishery_name == input$fishery_fishery) %>% 
+      select("Species Common Name" = spp_common, "% of catch allocated to fishery" = pct)
     
   })
-     
+  
   }
 
 
+# output$fao_area_box <- renderInfoBox({
+#   
+#   fishing_area <- fisheries_info %>% 
+#     filter(country == input$country_fishery,
+#            fishery_name == input$fishery_fishery) %>% 
+#     select(fao_area) %>% 
+#     dplyr::distinct() %>% 
+#     pull()
+#   
+#   infoBox(
+#     "FAO Fishing Area", paste0(fishing_area), icon = icon("list"),
+#     color = "purple")
+#   })
+# 
+# output$fao_area_box <- renderInfoBox({
+#   
+#   gear_use <- fisheries_info %>% 
+#     filter(country == input$country_fishery,
+#            fishery_name == input$fishery_fishery) %>% 
+#     select(gear) %>% 
+#     dplyr::distinct() %>% 
+#     pull()
+#   
+#   infoBox(
+#     "Gear", paste0(gear_use) , icon = icon("thumbs-up", lib = "glyphicon"),
+#     color = "yellow"
+#   )
+# })
