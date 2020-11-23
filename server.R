@@ -1,6 +1,7 @@
 library(shiny)
 library(ggplot2) # load ggplot
 
+
 function(input, output, session){
   
 
@@ -47,8 +48,22 @@ function(input, output, session){
        
   output$table_title <- renderText({ 
     
-    paste0("Species Allocation for ", input$fishery_fishery, " in " , input$country_fishery)
+    paste0("Information for ", input$fishery_fishery, " in " , input$country_fishery)
   })
+  
+  gear_use <- reactive({
+    get(fisheries_info %>% 
+    filter(country == input$country_fishery,
+           fishery_name == input$fishery_fishery) %>%
+    select(gear) %>%
+    dplyr::distinct())
+  })
+    
+  output$fishery_facts <- renderText(
+
+    gear_use
+    
+  )
   
   output$species_table <- renderTable({
     

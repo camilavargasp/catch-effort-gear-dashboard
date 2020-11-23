@@ -5,7 +5,8 @@ library(plotly)
 
 source("effort_plots.R")
 
-fisheries_info <- read_csv("data/fao_fisheries_norm_bk.csv")
+fisheries_info <- read_csv("data/fao_fisheries_norm_bk.csv") %>% 
+  mutate_at("vessel_length", replace_na, "no information")
 
 
 # Setting up the dashboard page
@@ -91,8 +92,12 @@ dashboardPage(
               
               
               box(
+                
                 h3(
                   textOutput("table_title")
+                ),
+                h5(
+                  textOutput("fishery_facts")
                 ),
                 
                 tableOutput("species_table"),
