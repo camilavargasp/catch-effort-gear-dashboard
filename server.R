@@ -2,6 +2,10 @@ library(shiny)
 library(ggplot2) # load ggplot
 
 
+fisheries_info <- read_csv("data/fao_fisheries_norm_bk.csv") %>% 
+  mutate_at("vessel_length", replace_na, "no information")
+
+
 function(input, output, session){
   
 
