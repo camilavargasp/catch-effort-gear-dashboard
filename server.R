@@ -5,7 +5,9 @@ library(ggplot2) # load ggplot
 
 function(input, output, session){
   
+  ##Fisheries by country
   observe({
+    
     updateSelectInput(session, 
                       "fishery_fishery", 
                       choices = fisheries_info[fisheries_info$country == input$country_fishery, "fishery_name"]) ##to ba able to select only the fisheries within the selected country
@@ -42,6 +44,57 @@ species_alocation <- fisheries_info %>%
     
   })
   
+  ## Industrial Fisheries effort metrics
+  observe({
+    
+    updateSelectInput(session, 
+                      "country_industrial", 
+                      choices = fisheries_gfw_cat[fisheries_gfw_cat$year == input$year_industrial,"fao_landing_c_name"]) ##to ba able to select only the fisheries within the selected country
+
+    })
+  
+  observe({
+  
+  updateSelectInput(session, 
+                    "gfw_gear_industrial", 
+                    choices = fisheries_gfw_cat[fisheries_gfw_cat$fao_landing_c_name == input$country_industrial,"GFWCategory"]) ##to ba able to select only the fisheries within the selected country
+
+  })
+  
+  output$gfw_fishery_table_title <- renderText({ 
+    ##If reactive title is what we want we call the objects in the ui
+    # paste0("Species in ", input$fishery_fishery, " in " , input$country_fishery)
+    "Fisheries included in the selected gear type"
+    
+  })
+  
+  
+  output$gfw_fishery_table <- renderTable({
+    
+    # species_alocation <- fisheries_info %>% 
+    #   filter(country == input$country_fishery,
+    #          fishery_name == input$fishery_fishery) %>% 
+    #   select("Species Common Name" = spp_common, "% of catch allocated to fishery" = pct)
+    
+  })
+  
+  output$effort_metric_table_title <- renderText(
+    "Effort Metrics"
+  )
+  
+  output$effort_metric_table <- renderTable({
+    
+    # fishery_facts <- fisheries_info %>% 
+    #   filter(country == input$country_fishery,
+    #          fishery_name == input$fishery_fishery) %>% 
+    #   select("Gear" = gear_name, "Vessel Length" = vessel_length, "Fishing Depth" = depth, "FAO fishing Area"= fao_area, "Fisheries Sector" = fisheries_sector) %>% 
+    #   distinct()
+    
+  })
+  
+  
+
+  ##Catch effort plots tab
   output$catch_effort_plot <- renderPlotly({
     
     gear_option <- switch(input$gear,

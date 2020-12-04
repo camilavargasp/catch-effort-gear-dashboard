@@ -90,8 +90,8 @@ dashboardPage(
                   ),
                   
                   tableOutput("gfw_fishery_table"),
-                  width = 8)
-              ),
+                  width = 8),
+              
               box(
                 
                 h3(
@@ -101,6 +101,7 @@ dashboardPage(
                 tableOutput("effort_metric_table"),
                 width = 8)
               ),
+      ),
       
         ##Third tab content - catch effort plots
            tabItem(tabName = "catch_effort",

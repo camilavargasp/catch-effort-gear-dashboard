@@ -26,9 +26,9 @@ fisheries_info <- read_csv(here::here("data/fao_fisheries_norm.csv")) %>%
     TRUE ~ "industrial"))
 
 
-## Fifheries in each GFW Vessel Category
+## Fisheries in each GFW Vessel Category
 fisheries_gfw_cat <- read_csv(here::here("data/fisheries_in_gfw_cat.csv")) %>% 
-  select(year, fao_landing_c_name, fao_area_code, depth, location, vessel_length, GFWCategory) %>% 
+  select(year, fao_landing_c_name, fao_area_code, depth, location, vessel_length, fishery_name, GFWCategory) %>% 
   mutate_at("depth", replace_na, "no information") %>% 
   mutate(location = case_when(location == "none" ~ "no information",
                               T ~ location),
