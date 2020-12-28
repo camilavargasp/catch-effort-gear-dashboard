@@ -30,7 +30,7 @@ dashboardPage(
   dashboardBody(
     tabItems(
       
-   ##First tab content - Fisheries Info
+   ##First tab content - Fisheries Info by country
       tabItem(tabName = "fisheries_country",
               h2("Fisheries Information by Country"),
               h3("Learn about a fishery by selecting a country and a fishery within that territory"),
@@ -60,12 +60,12 @@ dashboardPage(
           
                 tableOutput("species_table"),
                 width = 8)
-           ),
+           )
            
       ),
     
       
-      ##Second tab content - Industrial Fisheries Effort
+      #Second tab content - Industrial Fisheries Effort
       tabItem(tabName = "industrial_effort",
               h2("Industrial Fisheries Effort Allocation"),
               h3("Learn about effort allocation per gear type for each country"),
@@ -81,26 +81,26 @@ dashboardPage(
                               label = "Select gear type",
                               choices = unique(fisheries_gfw_cat$GFWCategory)),
                   width = 4),
-                
-                
+
+
                 box(
-                  
+
                   h3(
                     textOutput("gfw_fishery_table_title")
                   ),
-                  
+
                   tableOutput("gfw_fishery_table"),
                   width = 8),
-              
+
               box(
-                
+
                 h3(
                   textOutput("effort_metric_table_title")
                 ),
-                
+
                 tableOutput("effort_metric_table"),
                 width = 8)
-              ),
+              )
       ),
       
         ##Third tab content - catch effort plots
