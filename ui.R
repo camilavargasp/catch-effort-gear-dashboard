@@ -21,7 +21,7 @@ dashboardPage(
     sidebarMenu(
       ## This defines the order of the tabs
       menuItem("Fisheries by Country", tabName = "fisheries_country"),
-      menuItem("Industrial Fisheries Effort", tabName = "industrial_effort"),
+      #menuItem("Industrial Fisheries Effort", tabName = "industrial_effort"),
       menuItem("Catch-Effort Relationship", tabName = "catch_effort")
     )
   ),
@@ -33,7 +33,7 @@ dashboardPage(
    ##First tab content - Fisheries Info by country
       tabItem(tabName = "fisheries_country",
               h2("Fisheries Information by Country"),
-              h3("Learn about a fishery by selecting a country and a fishery within that territory"),
+              h3("Learn about each logical fishery by selecting a country and a fishery within that territory"),
             fluidRow(
               box(
                 selectInput("country_fishery",
@@ -64,49 +64,50 @@ dashboardPage(
            
       ),
     
-      
+   ##################################################################   
       #Second tab content - Industrial Fisheries Effort
-      tabItem(tabName = "industrial_effort",
-              h2("Industrial Fisheries Effort Allocation"),
-              h3("Learn about effort allocation per gear type for each country"),
-              fluidRow(
-                box(
-                  selectInput("year_industrial",
-                              label = "Select a year",
-                              choices = unique(fisheries_gfw_cat$year)),
-                  selectInput("country_industrial",
-                              label = "Select a country",
-                              choices = unique(fisheries_gfw_cat$fao_landing_c_name)),
-                  selectInput("gfw_gear_industrial)",
-                              label = "Select gear type",
-                              choices = unique(fisheries_gfw_cat$GFWCategory)),
-                  width = 4),
-
-
-                box(
-
-                  h3(
-                    textOutput("gfw_fishery_table_title")
-                  ),
-
-                  tableOutput("gfw_fishery_table"),
-                  width = 8),
-
-              box(
-
-                h3(
-                  textOutput("effort_metric_table_title")
-                ),
-
-                tableOutput("effort_metric_table"),
-                width = 8)
-              )
-      ),
+      # tabItem(tabName = "industrial_effort",
+      #         h2("Industrial Fisheries Effort Allocation"),
+      #         h3("Learn about effort allocation per gear type for each country"),
+      #         fluidRow(
+      #           box(
+      #             selectInput("year_industrial",
+      #                         label = "Select a year",
+      #                         choices = unique(fisheries_gfw_cat$year)),
+      #             selectInput("country_industrial",
+      #                         label = "Select a country",
+      #                         choices = unique(fisheries_gfw_cat$fao_landing_c_name)),
+      #             selectInput("gfw_gear_industrial)",
+      #                         label = "Select gear type",
+      #                         choices = unique(fisheries_gfw_cat$GFWCategory)),
+      #             width = 4),
+      # 
+      # 
+      #           box(
+      # 
+      #             h3(
+      #               textOutput("gfw_fishery_table_title")
+      #             ),
+      # 
+      #             tableOutput("gfw_fishery_table"),
+      #             width = 8),
+      # 
+      #         box(
+      # 
+      #           h3(
+      #             textOutput("effort_metric_table_title")
+      #           ),
+      # 
+      #           tableOutput("effort_metric_table"),
+      #           width = 8)
+      #         )
+      # ),
       
         ##Third tab content - catch effort plots
            tabItem(tabName = "catch_effort",
                    h2("Catch Effort Relationship by Fishing Gear Type"),
                    h4("Explore the relationship between fisheries catch and vessels' effort in different FAO fishing areas"),
+                   h5("In the plots, points represent logical fisheries, with point diameter indicating number of vessels and color indicating FAO area. The x-coordinate indicates the average scaling characteristic for the fishery; the y-coordinate indicates effort per unit catch on a log scale. Quantile regression lines from τ=0.2 to τ=0.8 (solid) and τ=0.9 (dashed) are shown in blue."),
                    
                    fluidRow(
                      box(
@@ -124,7 +125,7 @@ dashboardPage(
                                                "Other Fishing", 
                                                "Trollers")),
                        selectInput("metric", 
-                                   label = "Choose an effort metric",
+                                   label = "Choose a scaling characteristic",
                                    choices = c("Vessel Length (m)",
                                                "Vessel Tonnage (gt)",
                                                "Vessel Engine Power (kw)"),
@@ -136,6 +137,12 @@ dashboardPage(
                                                "One plot (all FAO Areas)" = "one_plot")),
                        width = 4),
                      
+                     # box(
+                     #   h3("FAO Fishing Areas Map"),
+                     #   imageOutput("fao_area_image"),
+                     #   width = 8
+                     #   
+                     # ),
                      
                      box(
                        h3("Results"),

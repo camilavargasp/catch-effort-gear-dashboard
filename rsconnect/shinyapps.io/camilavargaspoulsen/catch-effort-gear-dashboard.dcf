@@ -5,6 +5,6 @@ account: camilavargaspoulsen
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3290994
-bundleId: 4015849
+bundleId: 4328503
 url: https://camilavargaspoulsen.shinyapps.io/catch-effort-gear-dashboard/
-when: 1608569110.32397
+when: 1615423976.12919
