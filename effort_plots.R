@@ -80,7 +80,7 @@ effort_moment_fao_plot <- function(gear_type,
     geom_quantile(quantiles = 0.9, color = reg_color, linetype= "dashed", show.legend = FALSE)+  
     #labs(color = "Quantile")+
     #facet_wrap(~effort_type, scales = "free")+
-    facet_wrap(~fao_area_code, scales = "free")+
+    facet_wrap(~fao_area_code)+ #scales = "free"
     theme_bw()+
     #labs(title = paste("effort intensity by moment of effort,", gear, sep=" "))+
     theme(plot.title = ggtext::element_textbox_simple(
